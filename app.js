@@ -28,7 +28,7 @@ todo -- PASOS / PSEUDOCÓDIGO
 
 // todo -- Código
 
-//Paso 1: Solicitar al usuario 3 números por let number1 = Number(prompt()). Esto hará que lo que ingrese el usuario sea un número y esté guardado en una variable que puede cambiar.
+/*Paso 1: Solicitar al usuario 3 números por let number1 = Number(prompt()). Esto hará que lo que ingrese el usuario sea un número y esté guardado en una variable que puede cambiar.
 let number1 = Number(prompt("Ingresa el primer número"));
 let number2 = Number(prompt("Ingresa el segundo número"));
 let number3 = Number(prompt("Ingresa el tercer número"));
@@ -118,4 +118,92 @@ reversedNumbers.innerHTML = `
         <li class="list-group-item">${orderedArrNumbers[2]}</li>
     </ul>
     </div>
-`
+`*/
+
+// todo -- Código final para que renderice todo en el navegador:
+
+const main = document.getElementsByTagName("main")[0];
+
+let number1 = Number(prompt("Ingresa el primer número"));
+let number2 = Number(prompt("Ingresa el segundo número"));
+let number3 = Number(prompt("Ingresa el tercer número"));
+
+const arrNumbers = [number1, number2, number3];
+
+const orderedArrNumbers = [...arrNumbers].sort((a, b) => a - b);
+const reversedArrNumbers = [...orderedArrNumbers].reverse();
+
+let equalMessage = "";
+
+if (number1 === number2 && number2 === number3) {
+    equalMessage = `
+        <div class="alert alert-primary" role="alert">
+            Los tres números son iguales
+        </div>
+    `;
+} else {
+    if (number1 === number2) {
+        equalMessage += `
+            <div class="alert alert-primary" role="alert">
+                El número ${number1} y el número ${number2} son iguales
+            </div>
+        `;
+    }
+
+    if (number2 === number3) {
+        equalMessage += `
+            <div class="alert alert-primary" role="alert">
+                El número ${number2} y el número ${number3} son iguales
+            </div>
+        `;
+    }
+
+    if (number1 === number3) {
+        equalMessage += `
+            <div class="alert alert-primary" role="alert">
+                El número ${number1} y el número ${number3} son iguales
+            </div>
+        `;
+    }
+}
+
+main.innerHTML = `
+    ${equalMessage}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Mayor, medio y menor
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Número mayor: ${reversedArrNumbers[0]}</li>
+            <li class="list-group-item">Número medio: ${reversedArrNumbers[1]}</li>
+            <li class="list-group-item">Número menor: ${reversedArrNumbers[2]}</li>
+        </ul>
+    </div>
+
+    <br>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Ordenados de mayor a menor
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">${reversedArrNumbers[0]}</li>
+            <li class="list-group-item">${reversedArrNumbers[1]}</li>
+            <li class="list-group-item">${reversedArrNumbers[2]}</li>
+        </ul>
+    </div>
+
+    <br>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Ordenados de menor a mayor
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">${orderedArrNumbers[0]}</li>
+            <li class="list-group-item">${orderedArrNumbers[1]}</li>
+            <li class="list-group-item">${orderedArrNumbers[2]}</li>
+        </ul>
+    </div>
+`;
